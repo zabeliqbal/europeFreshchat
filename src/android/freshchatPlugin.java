@@ -5,8 +5,6 @@
 
 
 package com.freshdesk.freshchat.android;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.ConnectionResult;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -28,8 +26,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.freshchat.consumer.sdk.*;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -370,49 +366,7 @@ public class freshchatPlugin extends CordovaPlugin {
                     return true;
                 }
 
-                if(action.equals("updatePushNotificationToken")) {
-                    if(args.length() == 0) {
-                        Log.e(LOG_TAG,"Please provide the token to register");
-                        return false;
-                    }
-                    String token = args.getString(0);
-                    Log.i(LOG_TAG,"update GCM registration has been called");
-                    Freshchat.getInstance(cordovaContext).setPushRegistrationToken(token);
-                    return true;
-                }
-
-                if(action.equals("updateAndroidNotificationProperties")) {
-                    Log.d(LOG_TAG,"setting notification properties!");
-                    if(args.length() == 0) {
-                        Log.e(LOG_TAG,"Please provide parameters to update a user");
-                        return false;
-                    }
-                    JSONObject jsonArgs = new JSONObject(args.getString(0));
-                    FreshchatNotificationConfig notificationConfig = new FreshchatNotificationConfig();
-                    
-                    if(jsonArgs.has("notificationSoundEnabled")) {
-                        notificationConfig.setNotificationSoundEnabled(jsonArgs.getBoolean("notificationSoundEnabled"));
-                    }
-                    if(jsonArgs.has("smallIcon")) {
-                        String iconName = jsonArgs.getString("smallIcon");
-                        int iconId = cordovaContext.getResources().getIdentifier(iconName, "drawable", cordovaContext.getPackageName());
-                        notificationConfig.setSmallIcon(iconId);
-                    }
-                    if(jsonArgs.has("largeIcon")) {
-                        String iconName = jsonArgs.getString("largeIcon");
-                        int iconId = cordovaContext.getResources().getIdentifier(iconName, "drawable", cordovaContext.getPackageName());
-                        notificationConfig.setLargeIcon(iconId);
-                    }
-                    if(jsonArgs.has("launchActivityOnFinish")) {
-                        notificationConfig.launchActivityOnFinish(jsonArgs.getString("launchActivityOnFinish"));
-                    }
-                    if(jsonArgs.has("notificationPriority")) {
-                        notificationConfig.setPriority(jsonArgs.getInt("notificationPriority"));
-                    }
-                    Freshchat.getInstance(cordovaContext).setNotificationConfig(notificationConfig);
-                    return true;
-                }
-                Log.d(LOG_TAG,"action does not have a function to match it:"+action);
+                
 
             } catch (Exception e) {
                 Log.e(LOG_TAG,"exception while perfroming action:"+action,e);

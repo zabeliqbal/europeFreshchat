@@ -7,4 +7,12 @@ allprojects {
 
 dependencies {
     compile 'com.github.freshdesk:freshchat-android:2.2.0'
+    
 }
+
+    compileOptions {
+    targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
+}
+

@@ -83,9 +83,9 @@ public class freshchatPlugin extends CordovaPlugin {
 
                     freshchatConfig = new FreshchatConfig(appId,appKey);
 
-                    if(initArgs.has("domain")) {
-                        freshchatConfig.setDomain(initArgs.getString("domain"));
-                    }
+                
+                        freshchatConfig.setDomain("https://msdk.eu.freshchat.com");
+                    
                     if(initArgs.has("cameraCaptureEnabled")) {
                         freshchatConfig.setCameraCaptureEnabled(initArgs.getBoolean("cameraCaptureEnabled"));
                     }
